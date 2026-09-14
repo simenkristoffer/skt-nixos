@@ -93,6 +93,9 @@
     shell = pkgs.zsh;
     packages = with pkgs; [
       fastfetch
+      tealdeer
+      mcfly
+      bat
     ];
 
   };
