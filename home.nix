@@ -42,4 +42,12 @@
       vim.opt.scrolloff = 8
     '';
       };
+
+    programs.mcfly = {
+        enable = true;
+        enableZshIntegration = true;
+        fuzzySearchFactor = 2;
+        interfaceView = "BOTTOM";
+        keyScheme = "vim";
+    };
 }

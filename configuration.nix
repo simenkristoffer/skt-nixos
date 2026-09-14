@@ -72,7 +72,7 @@
   # Configure console keymap
   #console.keyMap = "no";
   console = {
-#    earlySetup = true;
+#    earlySetup = true; # For å fikse riktig font i tty, kan sikkert fjernes?
     enable = true;
     keyMap = "no";
     font = "latarcyrheb-sun32";
@@ -94,8 +94,8 @@
     packages = with pkgs; [
       fastfetch
       tealdeer
-      mcfly
       bat
+      firefox
     ];
 
   };
