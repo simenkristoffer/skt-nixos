@@ -107,6 +107,8 @@
     wget
     fuzzel # for Niri, can be removed later (maybe?)
     alacritty # Also a Niri default, just for easier config 
+    stow
+    tree
   ];
   
 
