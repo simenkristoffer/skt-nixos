@@ -36,6 +36,7 @@
       vim.opt.expandtab = true
       vim.opt.autoindent = true
       vim.opt.smartindent = true
+
       -- Utseende
       vim.opt.wrap = false
       vim.opt.cursorline = true

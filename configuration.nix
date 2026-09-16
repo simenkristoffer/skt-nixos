@@ -29,6 +29,7 @@
 # NETWORK
   networking.hostName = "skt-nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
+  services.openssh.enable = true;
   services.tailscale.enable = true;
   services.tailscale.extraUpFlags = [
     "--ssh"
@@ -41,7 +42,6 @@
   # networking.firewall.enable = false;
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
 
 # LOCALE
@@ -109,6 +109,7 @@
     alacritty # Also a Niri default, just for easier config 
     stow
     tree
+    ncurses
   ];
   
 
