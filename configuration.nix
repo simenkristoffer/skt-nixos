@@ -95,7 +95,6 @@
       fastfetch
       tealdeer
       bat
-      firefox
     ];
 
   };
