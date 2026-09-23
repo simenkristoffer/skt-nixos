@@ -7,7 +7,20 @@
   home.homeDirectory = "/home/simen";
   home.stateVersion = "26.05";
 
-  programs.zsh.enable = true;
+# -- zsh
+  programs.zsh = {
+    enable = true;
+    };
+
+  programs.zsh.antidote = {
+      enable = true;
+      plugins = [
+        "mattmc3/zfunctions"
+        "zsh-users/zsh-autosuggestions"
+        "zdharma-continuum/fast-syntax-highlighting kind:defer"
+        "zsh-users/zsh-history-substring-search"
+      ];
+  };
 
 # -- Git
   programs.git = {
@@ -35,8 +48,8 @@
       vim.opt.relativenumber = true
 
       -- Tabs og innrykk
-      vim.opt.tabstop = 4
-      vim.opt.shiftwidth = 4
+      vim.opt.tabstop = 2
+      vim.opt.shiftwidth = 2
       vim.opt.expandtab = true
       vim.opt.autoindent = true
       vim.opt.smartindent = true

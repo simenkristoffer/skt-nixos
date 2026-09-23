@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.noctalia.nixosModules.default
     ];
 
   # Enable support for Flakes 
@@ -79,7 +78,8 @@
     };
 
 # SHELL
-  programs.zsh.enable = true; # Installs Zsh
+  programs.zsh.enable = true; # Installs and uses Zsh
+  programs.zsh.enableGlobalCompInit = false; # Avoid double tab completion for speed; Home Manager already runs it
 
 # DESKTOP 
   programs.niri.enable = true; # Use Niri as Window Manager
