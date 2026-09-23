@@ -11,14 +11,18 @@
       };
       
     niri = {
-        url = "github:sodiboo/niri-flake";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     
     zen-browser = {
-    url = "github:0xc000022070/zen-browser-flake";
-    inputs = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
       # IMPORTANT: To ensure compatibility with the latest Firefox version, use nixpkgs-unstable.
       nixpkgs.follows = "nixpkgs-unstable";
       # Use my home-manager instead of the Zen flake's own copy.
@@ -31,7 +35,7 @@
 
   };
 
-    outputs = { self, nixpkgs, home-manager, niri, ... }@inputs: {
+    outputs = { self, nixpkgs, home-manager, niri, quickshell, ... }@inputs: {
       nixosConfigurations.skt-nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };

@@ -43,6 +43,11 @@
     vimAlias = true;
     defaultEditor = true;
 
+
+   plugins = [
+      pkgs.vimPlugins.nvim-treesitter.withAllGrammars # Installer Tree-sitter https://github.com/nvim-treesitter/nvim-treesitter
+    ];
+
     initLua = ''
       -- Linjenumre
       vim.opt.number = true
@@ -59,22 +64,35 @@
       vim.opt.wrap = false
       vim.opt.cursorline = true
       vim.opt.scrolloff = 8
-    '';
-      };
+
+      -- Tree-sitter: slå på for alle filtyper som har en parser
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
+        end,
+      })
+    '';      };
 
 # -- McFly
     programs.mcfly = {
-        enable = true;
-        enableZshIntegration = true;
-        fuzzySearchFactor = 2;
-        interfaceView = "BOTTOM";
-        keyScheme = "vim";
+      enable = true;
+      enableZshIntegration = true;
+      fuzzySearchFactor = 2;
+      interfaceView = "BOTTOM";
+      keyScheme = "vim";
     };
 
 # -- Zen Browser 
 #    https://github.com/0xc000022070/zen-browser-flake
     programs.zen-browser = {
-        enable = true;
-        setAsDefaultBrowser = true;
+      enable = true;
+      setAsDefaultBrowser = true;
   }; 
+
+# -- QuickShell
+    programs.quickshell = {
+      enable = true;
+      package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    #  systemd.enable = true;
+  };
 }
