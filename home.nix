@@ -30,6 +30,7 @@
         name = "Simen Kristoffer";
         email = "post@simenkristoffer.no";
       };
+      push.autoSetupRemote = true;
       init.defaultBranch = "main";
       core.editor = "nvim";
     };
