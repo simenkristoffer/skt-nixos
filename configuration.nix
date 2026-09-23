@@ -2,12 +2,13 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.noctalia.nixosModules.default
     ];
 
   # Enable support for Flakes 
@@ -41,7 +42,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Enable the OpenSSH daemon.
 
 
 # LOCALE
@@ -84,7 +84,7 @@
 # DESKTOP 
   programs.niri.enable = true; # Use Niri as Window Manager
 
-# USERS
+ # USERS
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."simen" = {
     isNormalUser = true;

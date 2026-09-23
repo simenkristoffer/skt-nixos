@@ -15,6 +15,7 @@
         inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    
     zen-browser = {
     url = "github:0xc000022070/zen-browser-flake";
     inputs = {
@@ -30,9 +31,10 @@
 
   };
 
-    outputs = { self, nixpkgs, home-manager, niri, ... }@inputs: {
+    outputs = { self, nixpkgs, home-manager, niri, noctalia, ... }@inputs: {
       nixosConfigurations.skt-nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
 	modules = [
 	  ./configuration.nix
       niri.nixosModules.niri
