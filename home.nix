@@ -50,6 +50,21 @@
   };
 };
 
+# -- Foot
+programs.foot = {
+  enable = true;
+  server.enable = true;
+  settings = {
+    main = {
+      font = "Iosevka:size=11";
+      pad = "8x8 center";
+    };
+    scrollback = {
+      lines = 10000;
+    };
+  };
+};
+
 # -- Neovim
   programs.neovim = {
     enable = true;
