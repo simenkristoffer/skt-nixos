@@ -111,6 +111,9 @@
     ncurses
   ];
   
+  fonts.packages = with pkgs; [
+    iosevka
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
