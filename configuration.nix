@@ -95,6 +95,7 @@
       fastfetch
       tealdeer
       bat
+      xplr
     ];
 
   };
