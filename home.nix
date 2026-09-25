@@ -43,9 +43,8 @@
       font = {
         normal = {
           family = "Iosevka";
-          style = "Regular";
       };
-      size = 18.0;
+      size = 20.0;
     };
   };
 };
@@ -128,4 +127,19 @@ programs.foot = {
       package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default;
     #  systemd.enable = true;
   };
+# -- Wpaperd
+  services.wpaperd = {
+    enable = true;
+    settings = {
+      any = {
+        path = "/home/simen/nixos-config/wallpapers/freischwimmer94.jpg";
+    };
+  };
+};
+
+
+
+
+
+
 }

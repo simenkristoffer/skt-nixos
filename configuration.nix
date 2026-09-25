@@ -114,6 +114,7 @@
   
   fonts.packages = with pkgs; [
     iosevka
+    geist-font
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
