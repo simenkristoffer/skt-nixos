@@ -40,6 +40,16 @@
   programs.alacritty = {
     enable = true;
     settings = {
+      cursor = {
+        style = {
+          shape = "Underline";
+          blinking = "Always";
+        };
+      };
+      window = {
+        opacity = 0.7;
+        blur = true;
+      };
       font = {
         normal = {
           family = "Iosevka";
@@ -132,6 +142,7 @@ programs.foot = {
     enable = true;
     settings = {
       any = {
+        mode = "center";
         path = "/home/simen/nixos-config/wallpapers/freischwimmer94.jpg";
     };
   };
