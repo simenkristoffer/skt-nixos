@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./modules/niri.nix
     ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; # Enable flakes
@@ -95,6 +96,7 @@
   # Home Manager
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
+    home-manager.extraSpecialArgs = { inherit inputs; };
     home-manager.users.simen = import ./home.nix;
 
   # List packages installed in system profile.
@@ -114,6 +116,20 @@
   # };
 
   # List services that you want to enable:
+
+  # Prerequisites for noctalia-shell's widgets/plugins (bluetooth,
+  # power-profile and battery in the control center/bar, plus the
+  # rylos/tailnet and rylos/syncthing plugins) — see
+  # modules/home/noctalia/settings.toml.
+  hardware.bluetooth.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
+  services.tailscale.enable = true;
+  services.syncthing = {
+    enable = true;
+    user = "simen";
+    dataDir = "/home/simen";
+  };
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

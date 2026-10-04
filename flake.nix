@@ -11,12 +11,22 @@
 
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs-unstable"; # krever nyeste quickshell
+    };
   };
 
-  outputs = { self, nixpkgs, zen-browser, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, zen-browser, home-manager, niri, noctalia, ... }@inputs: {
     nixosConfigurations."skt-nixos" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { inherit inputs; }; # <-- VIKTIG: Denne må være med!
+      specialArgs = { inherit inputs; }; # <-- IMPORTANT: this must be included!
       modules = [
         ./configuration.nix
 	home-manager.nixosModules.default
