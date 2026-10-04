@@ -108,7 +108,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+T hotkey-overlay-title="Open a Terminal: " { spawn "alacritty"; }
-    Mod+Return hotkey-overlay-title="Open Zen Browser" { spawn "zen-browser"; }
+    Mod+Return hotkey-overlay-title="Open Zen Browser" { spawn "zen-beta"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     Mod+Space hotkey-overlay-title="Toggle Launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
