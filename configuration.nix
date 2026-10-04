@@ -30,7 +30,7 @@
   # Allow unfree packages...
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "skt-nixos"; # Define your hostname.
+  networking.hostName = "skt-thinkpad"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
