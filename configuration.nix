@@ -89,8 +89,9 @@
       inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
       tree
       vscode
-      claude-code
       todoist
+      obsidian
+      rustdesk
     ];
   };
 

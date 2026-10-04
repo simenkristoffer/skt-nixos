@@ -24,7 +24,7 @@
   };
 
   outputs = { self, nixpkgs, zen-browser, home-manager, niri, noctalia, ... }@inputs: {
-    nixosConfigurations."skt-nixos" = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."skt-thinkpad" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; }; # <-- IMPORTANT: this must be included!
       modules = [
