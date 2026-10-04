@@ -90,7 +90,6 @@
       tree
       vscode
       claude-code
-      alacritty
       todoist
     ];
   };
