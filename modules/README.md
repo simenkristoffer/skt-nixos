@@ -13,7 +13,7 @@ modules/
 ├── niri.nix                       NixOS-level: niri-flake wiring (overlay + programs.niri)
 └── home/
     ├── niri/
-    │   ├── default.nix            home-manager: niri config + noctalia.kdl seed
+    │   ├── default.nix            home-manager: niri config + noctalia.kdl seed + gtk.css blur-matching transparency
     │   ├── config.kdl             Ported niri config (raw KDL)
     │   └── noctalia-theme-seed.kdl Placeholder for niri's `include "noctalia.kdl"`
     └── noctalia/

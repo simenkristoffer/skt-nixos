@@ -23,4 +23,41 @@
       install -D -m644 ${./noctalia-theme-seed.kdl} "$target"
     fi
   '';
+
+  # GTK Transparency: sidebar + titlebar go transparent (for niri's blur to
+  # show through), content pane stays opaque for readability. Targets
+  # libadwaita's AdwOverlaySplitView class names, so it applies to any app
+  # using that widget (Nautilus, Settings, ...), not just Nautilus. Lives
+  # here (not home.nix) because it only looks right paired with the blur
+  # window-rule in config.kdl for the same apps.
+  # Source: https://github.com/taiwbi/hypaurora/blob/main/gtk-4.0/tweaks/sidebar.css
+  # Note: no `!important` — GTK4's CSS engine doesn't support it (unlike
+  # GTK3) and silently drops the whole declaration if present. User CSS
+  # already loads after the theme's, so it wins the cascade without it.
+  home.file.".config/gtk-4.0/gtk.css".text = ''
+    window {
+      background: alpha(@window_bg_color, 0.8);
+    }
+
+    overlay-split-view revealer.raised.top-bar {
+      background: alpha(@window_bg_color, 0);
+      box-shadow: none;
+    }
+
+    overlay-split-view headerbar.titlebar {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    .sidebar-pane,
+    .sidebar,
+    .navigation-sidebar {
+      background: transparent;
+    }
+
+    .content-pane {
+      background: @view_bg_color;
+    }
+  '';
 }

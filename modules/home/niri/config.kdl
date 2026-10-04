@@ -276,10 +276,12 @@ blur {
     saturation 1.6   // More "glass" feel
 }
 
-// Blur for Zen and Alacritty (Alacritty opacity is set in alacritty.toml)
+// Blur for Zen, Alacritty, and Nautilus (Alacritty opacity is set in alacritty.toml;
+// Nautilus opacity is set in gtk.css via home.nix)
 window-rule {
     match app-id="^zen"
     match app-id="(?i)^alacritty$"
+    match app-id=r#"(?i)^org\.gnome\.nautilus$"#
     draw-border-with-background false
     background-effect {
         blur true
