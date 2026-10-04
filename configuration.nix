@@ -91,7 +91,7 @@
       vscode
       claude-code
       alacritty
-      todoist-cli
+      todoist
     ];
   };
 
