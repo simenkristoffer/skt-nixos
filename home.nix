@@ -26,6 +26,28 @@
     };
   };
 
+# -- Alacritty
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      general = {
+        import = [ "~/.config/alacritty/themes/noctalia.toml" ];
+      };
+      cursor = {
+        style = {
+          shape = "Underline";
+          blinking = "Always";
+        };
+      };
+      window = {
+        opacity = 0.85;
+        blur = true;
+      };
+    };
+  };
+
+
+
 # -- Neovim
   programs.neovim = {
     enable = true;

@@ -107,7 +107,7 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+T hotkey-overlay-title="Open a Terminal: " { spawn "konsole"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: " { spawn "alacritty"; }
     Mod+Return hotkey-overlay-title="Open Zen Browser" { spawn "zen-browser"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 

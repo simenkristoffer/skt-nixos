@@ -100,6 +100,7 @@
     home-manager.useUserPackages = true;
     home-manager.extraSpecialArgs = { inherit inputs; };
     home-manager.users.simen = import ./home.nix;
+    home-manager.backupFileExtension = "backup";
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
