@@ -272,7 +272,7 @@ binds {
 
 // Global blur settings (niri 26.04+)
 blur {
-    passes 4         // Smoother/larger blur, costs more GPU
+    passes 3         // Smoother/larger blur, costs more GPU
     offset 4.0       // Raise first, free performance-wise
     noise 0.03       // Reduces banding
     saturation 1.6   // More "glass" feel
@@ -284,6 +284,9 @@ window-rule {
     match app-id="^zen"
     match app-id="(?i)^alacritty$"
     match app-id=r#"(?i)^org\.gnome\.nautilus$"#
+    match app-id="org.gnome.Papers"
+
+
     draw-border-with-background false
     background-effect {
         blur true

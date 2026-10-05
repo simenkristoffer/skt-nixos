@@ -150,6 +150,7 @@
   services.upower.enable = true;
   services.fprintd.enable = true;
   services.tailscale.enable = true;
+  services.mullvad-vpn.enable = true;
 
   services.syncthing = {
     enable = true;
