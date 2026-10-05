@@ -17,7 +17,7 @@
 # -- zsh
   programs.zsh = {
     enable = true;
-#    programs.zsh.enableGlobalCompInit = false; # Makes Antidote load faster
+    enableCompletion = false; # Makes Antidote load faster
     };
 
   programs.zsh.antidote = {
