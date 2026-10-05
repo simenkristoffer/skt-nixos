@@ -21,7 +21,7 @@ input {
         accel-speed 0.1
     }
 
-    focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse max-scroll-amount="10%"
 }
 
 output "eDP-1" {
@@ -87,6 +87,8 @@ layout {
 }
 
 spawn-at-startup "noctalia"
+spawn-at-startup "xwayland-satellite"
+
 
 hotkey-overlay {
 }

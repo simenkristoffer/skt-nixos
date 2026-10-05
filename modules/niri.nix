@@ -9,4 +9,6 @@
   # (niri 26.04+ features used in modules/home/niri/config.kdl) —
   # confirmed by a failed build.
   programs.niri.package = pkgs.niri-unstable;
+
+
 }
