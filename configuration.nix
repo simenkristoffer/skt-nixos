@@ -93,6 +93,7 @@
       obsidian
       rustdesk
       virtualbox
+      zoom-us
     ];
   };
 
