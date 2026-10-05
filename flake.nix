@@ -6,7 +6,8 @@
     	url = "github:nix-community/home-manager/release-26.05";
 	inputs.nixpkgs.follows = "nixpkgs";
 	};
-    zen-browser = {
+   
+  zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
 
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -29,7 +30,7 @@
       specialArgs = { inherit inputs; }; # <-- IMPORTANT: this must be included!
       modules = [
         ./configuration.nix
-	home-manager.nixosModules.default
+	      home-manager.nixosModules.default
       ];
     };
   };

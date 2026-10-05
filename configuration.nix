@@ -32,6 +32,9 @@
 
   networking.hostName = "skt-thinkpad"; # Define your hostname.
 
+  # Set default shell
+  programs.zsh.enable = true;
+
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
 
@@ -84,6 +87,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.simen = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default

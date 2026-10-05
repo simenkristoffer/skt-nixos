@@ -14,6 +14,24 @@
 
 # TODO: xdg.userDirs
 
+# -- zsh
+  programs.zsh = {
+    enable = true;
+#    programs.zsh.enableGlobalCompInit = false; # Makes Antidote load faster
+    };
+
+  programs.zsh.antidote = {
+      enable = true;
+      plugins = [
+        "mattmc3/zfunctions"
+        "zsh-users/zsh-autosuggestions"
+        "zdharma-continuum/fast-syntax-highlighting kind:defer"
+        "zsh-users/zsh-history-substring-search"
+      ];
+  };
+
+
+
 # -- Cursor
   home.pointerCursor = {
     gtk.enable = true;
@@ -54,12 +72,18 @@
         };
       };
       window = {
-        opacity = 0.85;
-        blur = true;
+        opacity = 0.78;
+        blur = false;
+        padding = {
+          x = 15;
+          y = 15;
       };
     };
+      font = {
+        size = 15;
+        };
   };
-
+};
 
 # -- Neovim
   programs.neovim = {
