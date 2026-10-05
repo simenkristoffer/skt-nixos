@@ -1,4 +1,4 @@
-# skt-nix, my nixos config
+# skt-nixos, my nixos config
 
 ## why?
 1) I love learning new things
