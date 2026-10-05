@@ -12,6 +12,8 @@
 
   programs.home-manager.enable = true;
 
+# TODO: xdg.userDirs
+
 # -- Cursor
   home.pointerCursor = {
     gtk.enable = true;
