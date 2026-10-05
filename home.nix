@@ -12,6 +12,17 @@
 
   programs.home-manager.enable = true;
 
+# -- Cursor
+  home.pointerCursor = {
+    gtk.enable = true;
+    x11.enable = true;
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 16;
+};
+
+
+# === PROGRAMS === #
 # -- Git
   programs.git = {
     enable = true;
@@ -25,6 +36,7 @@
       core.editor = "nvim";
     };
   };
+
 
 # -- Alacritty
   programs.alacritty = {
@@ -47,14 +59,12 @@
   };
 
 
-
 # -- Neovim
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
-
 
    plugins = [
       pkgs.vimPlugins.nvim-treesitter.withAllGrammars # Install Tree-sitter https://github.com/nvim-treesitter/nvim-treesitter

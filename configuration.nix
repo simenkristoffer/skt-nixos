@@ -123,6 +123,7 @@
   hardware.bluetooth.enable = true;
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
+  services.fprintd.enable = true;
   services.tailscale.enable = true;
 
   services.syncthing = {
