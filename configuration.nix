@@ -114,6 +114,7 @@
       zoom-us
       spotify
       claude-code
+      zotero
     ];
   };
 
