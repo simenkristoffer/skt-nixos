@@ -100,6 +100,7 @@
 
   # Allow non-root capture of packets (grants CAP_NET_RAW/CAP_NET_ADMIN to dumpcap)
   programs.wireshark.enable = true;
+  programs.wireshark.dumpcap.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.simen = {
@@ -113,12 +114,18 @@
       todoist
       obsidian
       rustdesk
-      virtualbox
       zoom-us
       spotify
       claude-code
       zotero
       libreoffice
+      gnome-boxes
+
+    # School related
+      wireshark
+      mysql-workbench
+      dbeaver-bin
+      harlequin
     ];
   };
 
@@ -128,6 +135,10 @@
     home-manager.extraSpecialArgs = { inherit inputs; };
     home-manager.users.simen = import ./home.nix;
     home-manager.backupFileExtension = "backup";
+  
+# Enable VirtualBox
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "simen" ];
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).

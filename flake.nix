@@ -31,6 +31,7 @@
       modules = [
         ./configuration.nix
 	      home-manager.nixosModules.default
+        ./modules/mysql-server.nix
       ];
     };
   };
