@@ -42,7 +42,7 @@ window-rule {
 }
 
 layout {
-    gaps 18
+    gaps 22
 
     always-center-single-column
 

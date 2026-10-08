@@ -14,6 +14,29 @@
 
 # TODO: xdg.userDirs
 
+  home.packages = with pkgs; [
+    bat
+    inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
+    tree
+    vscode
+    todoist
+    obsidian
+    rustdesk
+    zoom-us
+    spotify
+    claude-code
+    zotero
+    libreoffice
+    gnome-boxes
+
+    # School related
+    wireshark
+    mysql-workbench
+    dbeaver-bin
+    harlequin
+  ];
+
+
 # -- zsh
   programs.zsh = {
     enable = true;

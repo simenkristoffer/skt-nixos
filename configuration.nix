@@ -107,26 +107,26 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = [ "wheel" "wireshark" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
-      tree
-      vscode
-      todoist
-      obsidian
-      rustdesk
-      zoom-us
-      spotify
-      claude-code
-      zotero
-      libreoffice
-      gnome-boxes
+   # packages = with pkgs; [
+   #   inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
+   #   tree
+   #   vscode
+   #   todoist
+   #   obsidian
+   #   rustdesk
+   #   zoom-us
+   #   spotify
+   #   claude-code
+   #   zotero
+   #   libreoffice
+   #   gnome-boxes
 
     # School related
-      wireshark
-      mysql-workbench
-      dbeaver-bin
-      harlequin
-    ];
+  #    wireshark
+   #   mysql-workbench
+   #   dbeaver-bin
+    #  harlequin
+    #];
   };
 
   # Home Manager
