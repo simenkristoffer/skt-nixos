@@ -37,12 +37,12 @@ output "HDMI-A-1" {
 }
 
 window-rule {
-    geometry-corner-radius 15
+    geometry-corner-radius 6
     clip-to-geometry true
 }
 
 layout {
-    gaps 12
+    gaps 18
 
     always-center-single-column
 
