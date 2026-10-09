@@ -28,6 +28,7 @@
     zotero
     libreoffice
     gnome-boxes
+    nodejs_22
 
     # School related
     wireshark
@@ -105,12 +106,12 @@
         opacity = 0.78;
         blur = false;
         padding = {
-          x = 15;
-          y = 15;
+          x = 7;
+          y = 7;
       };
     };
       font = {
-        size = 15;
+        size = 13;
         };
   };
 };
