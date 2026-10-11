@@ -116,7 +116,7 @@
           family = "DepartureMono Nerd Font"; 
           style = "Regular";
           };
-        size = 13;
+        size = 16.5;
         };
   };
 };
