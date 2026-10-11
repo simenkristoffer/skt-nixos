@@ -81,6 +81,10 @@
     simple-scan
     snapshot
     yelp
+    rygel
+    gnome-color-manager
+    gnome-disk-utility
+    seahorse
   ];
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
