@@ -4,6 +4,8 @@
 input {
     keyboard {
         xkb {
+            layout "no"
+            variant "nodeadkeys"
         }
 
         numlock
