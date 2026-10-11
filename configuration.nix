@@ -57,8 +57,31 @@
 
   services.gnome = {
     core-apps.enable = true;
-    core-developer-tools.enable = true;
   };
+
+  environment.gnome.excludePackages = with pkgs; [
+    baobab
+    decibels
+    epiphany
+    gnome-text-editor
+    gnome-calculator
+    gnome-calendar
+    gnome-characters
+    gnome-clocks
+    gnome-contacts
+    gnome-logs
+    gnome-maps
+    gnome-music
+    gnome-system-monitor
+    gnome-tecla
+    gnome-weather
+    loupe
+    gnome-connections
+    showtime
+    simple-scan
+    snapshot
+    yelp
+  ];
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";
