@@ -30,6 +30,7 @@
     gnome-boxes
     nodejs_22
 
+    catt
     # School related
     wireshark
     mysql-workbench
@@ -111,6 +112,10 @@
       };
     };
       font = {
+        normal = { 
+          family = "DepartureMono Nerd Font"; 
+          style = "Regular";
+          };
         size = 13;
         };
   };
@@ -156,6 +161,5 @@
       })
     '';      
     };
-
 
 }

@@ -107,26 +107,6 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = [ "wheel" "wireshark" ]; # Enable ‘sudo’ for the user.
-   # packages = with pkgs; [
-   #   inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
-   #   tree
-   #   vscode
-   #   todoist
-   #   obsidian
-   #   rustdesk
-   #   zoom-us
-   #   spotify
-   #   claude-code
-   #   zotero
-   #   libreoffice
-   #   gnome-boxes
-
-    # School related
-  #    wireshark
-   #   mysql-workbench
-   #   dbeaver-bin
-    #  harlequin
-    #];
   };
 
   # Home Manager
@@ -144,6 +124,10 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     brightnessctl
+    # Nix language support
+    nixfmt
+    nixd
+
     xwayland-satellite
     wget
     neovim
@@ -174,6 +158,10 @@
     user = "simen";
     dataDir = "/home/simen";
   };
+
+fonts.packages = with pkgs; [
+    nerd-fonts.departure-mono
+  ];
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
