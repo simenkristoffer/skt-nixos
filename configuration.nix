@@ -24,11 +24,16 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.xbootldrMountPoint = "/boot";
-  boot.loader.systemd-boot.configurationLimit = 10;
-  boot.loader.efi.efiSysMountPoint = "/efi";
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    xbootldrMountPoint = "/boot";
+    configurationLimit = 10;
+  };
+
+  boot.loader.efi = {
+    efiSysMountPoint = "/efi";
+    canTouchEfiVariables = true;
+  };
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -40,7 +45,7 @@
   # Allow unfree packages...
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "skt-thinkpad"; # Define your hostname.
+  networking.hostName = "skt-thinkpad";
 
   # Set default shell
   programs.zsh.enable = true;
@@ -54,11 +59,7 @@
   # GNOME
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
-
-  services.gnome = {
-    core-apps.enable = true;
-  };
-
+  services.gnome.core-apps.enable = true;
   environment.gnome.excludePackages = with pkgs; [
     baobab
     decibels
@@ -145,16 +146,17 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
+    # Essential
     brightnessctl
-    # Nix language support
-    nixfmt
-    nixd
     xwayland-satellite
     wget
     neovim
     git
     zip
     unzip
+    # Nix language support
+    nixfmt
+    nixd
   ];
 
   # List services that you want to enable:
@@ -164,7 +166,6 @@
   services.fprintd.enable = true;
   services.tailscale.enable = true;
   services.mullvad-vpn.enable = true;
-
   services.syncthing = {
     enable = true;
     user = "simen";
