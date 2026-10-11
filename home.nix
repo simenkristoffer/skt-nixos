@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -12,7 +17,7 @@
 
   programs.home-manager.enable = true;
 
-# TODO: xdg.userDirs
+  # TODO: xdg.userDirs
 
   home.packages = with pkgs; [
     bat
@@ -27,9 +32,7 @@
     claude-code
     zotero
     libreoffice
-    gnome-boxes
     nodejs_22
-
     catt
     # School related
     wireshark
@@ -38,44 +41,40 @@
     harlequin
   ];
 
-
-# -- zsh
+  # -- zsh
   programs.zsh = {
     enable = true;
     enableCompletion = false; # Makes Antidote load faster
-    };
-
-  programs.zsh.antidote = {
-      enable = true;
-      plugins = [
-        "mattmc3/zfunctions"
-        "zsh-users/zsh-autosuggestions"
-        "zdharma-continuum/fast-syntax-highlighting kind:defer"
-        "zsh-users/zsh-history-substring-search"
-      ];
   };
 
-# -- zoxide
+  programs.zsh.antidote = {
+    enable = true;
+    plugins = [
+      "mattmc3/zfunctions"
+      "zsh-users/zsh-autosuggestions"
+      "zdharma-continuum/fast-syntax-highlighting kind:defer"
+      "zsh-users/zsh-history-substring-search"
+    ];
+  };
+
+  # -- zoxide
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
     options = [ "--cmd cd" ];
   };
 
-
-
-# -- Cursor
+  # -- Cursor
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
     name = "Adwaita";
     package = pkgs.adwaita-icon-theme;
     size = 16;
-};
+  };
 
-
-# === PROGRAMS === #
-# -- Git
+  # === PROGRAMS === #
+  # -- Git
   programs.git = {
     enable = true;
     settings = {
@@ -89,8 +88,7 @@
     };
   };
 
-
-# -- Alacritty
+  # -- Alacritty
   programs.alacritty = {
     enable = true;
     settings = {
@@ -109,26 +107,26 @@
         padding = {
           x = 7;
           y = 7;
+        };
+      };
+      font = {
+        normal = {
+          family = "DepartureMono Nerd Font";
+          style = "Regular";
+        };
+        size = 13;
       };
     };
-      font = {
-        normal = { 
-          family = "DepartureMono Nerd Font"; 
-          style = "Regular";
-          };
-        size = 13;
-        };
   };
-};
 
-# -- Neovim
+  # -- Neovim
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
 
-   plugins = [
+    plugins = [
       pkgs.vimPlugins.nvim-treesitter.withAllGrammars # Install Tree-sitter https://github.com/nvim-treesitter/nvim-treesitter
       pkgs.vimPlugins.vim-moonfly-colors
       pkgs.vimPlugins.neo-tree-nvim
@@ -159,7 +157,7 @@
           pcall(vim.treesitter.start, args.buf)
         end,
       })
-    '';      
-    };
+    '';
+  };
 
 }

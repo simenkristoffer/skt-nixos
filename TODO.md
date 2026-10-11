@@ -1,7 +1,10 @@
 # NixOS TODOs
 
+# Important fixes
+[] Enable firewall
+
 # Minor implementations
-[] Install zoxide
+[x] Install zoxide
 [] Set up zsh aliases for
     - zoxide
     - sudo nixos-rebuild switch --flake (then directory to flake)
