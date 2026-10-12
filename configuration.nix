@@ -162,6 +162,7 @@
 
 fonts.packages = with pkgs; [
     nerd-fonts.departure-mono
+    cozette
   ];
 
   # Enable the OpenSSH daemon.
