@@ -116,6 +116,8 @@
     git
     zip
     unzip
+    bat
+    tree
     # Nix language support
     nixfmt
     nixd
@@ -126,14 +128,17 @@
   users.extraGroups.vboxusers.members = [ "simen" ];
 
   # == Power and Session Services
-  services.power-profiles-daemon.enable = true;
-  services.upower.enable = true;
-  services.fprintd.enable = true;
+  services = {
+    power-profiles-daemon.enable = true;
+    upower.enable = true;
+    fprintd.enable = true;
+  };
   hardware.bluetooth.enable = true;
 
   # == Fonts
   fonts.packages = with pkgs; [
     nerd-fonts.departure-mono
+    nerd-fonts.mononoki
   ];
 
   # DO NOT EVER CHANGE THIS LINE

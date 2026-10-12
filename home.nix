@@ -4,25 +4,22 @@
   inputs,
   ...
 }:
-
+# TODO: xdg.userDirs
 {
   imports = [
     ./modules/home/niri/default.nix
     ./modules/home/noctalia/default.nix
   ];
 
-  home.username = "simen";
-  home.homeDirectory = "/home/simen";
-  home.stateVersion = "26.05";
-
+  # == Home Manager Specific
   programs.home-manager.enable = true;
 
-  # TODO: xdg.userDirs
+  home.username = "simen";
+  home.homeDirectory = "/home/simen";
 
+  # == Packages
   home.packages = with pkgs; [
-    bat
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
-    tree
     vscode
     todoist
     obsidian
@@ -41,39 +38,30 @@
     harlequin
   ];
 
-  # -- zsh
+  # == Shell & Terminal
   programs.zsh = {
     enable = true;
     enableCompletion = false; # Makes Antidote load faster
+    antidote = {
+      enable = true;
+      plugins = {
+        "mattmc3/zfunctions" = { };
+        "zsh-users/zsh-autosuggestions" = { };
+        "zdharma-continuum/fast-syntax-highlighting" = {
+          kind = "defer";
+        };
+        "zsh-users/zsh-history-substring-search" = { };
+      };
+    };
   };
 
-  programs.zsh.antidote = {
-    enable = true;
-    plugins = [
-      "mattmc3/zfunctions"
-      "zsh-users/zsh-autosuggestions"
-      "zdharma-continuum/fast-syntax-highlighting kind:defer"
-      "zsh-users/zsh-history-substring-search"
-    ];
-  };
-
-  # -- zoxide
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
     options = [ "--cmd cd" ];
   };
 
-  # -- Cursor
-  home.pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-    size = 16;
-  };
-
-  # === PROGRAMS === #
+  # == PROGRAMS
   # -- Git
   programs.git = {
     enable = true;
@@ -160,4 +148,16 @@
     '';
   };
 
+  # == Theming
+  home.pointerCursor = {
+    # The cursor is super tiny if this is not set.
+    gtk.enable = true;
+    x11.enable = true;
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 16;
+  };
+
+  # DO NOT EVER CHANGE THIS LINE
+  home.stateVersion = "26.05"; # Did you read the comment?
 }
