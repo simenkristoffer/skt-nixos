@@ -23,6 +23,7 @@
     "nix-command"
     "flakes"
   ];
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -46,19 +47,47 @@
     };
     kernelPackages = pkgs.linuxPackages_latest; # Use latest kernel.
   };
+
   hardware.enableRedistributableFirmware = true;
   nixpkgs.config.allowUnfree = true; # Allow unfree packages...
   zramSwap.enable = true; # In-memory SWAP
 
+  # == Networking
+  networking.hostName = "skt-thinkpad";
+  networking.networkmanager.enable = true;
+
+  services.tailscale.enable = true;
+  services.mullvad-vpn.enable = true;
+
+  services.syncthing = {
+    enable = true;
+    user = "simen";
+    dataDir = "/home/simen";
+  };
+
+  programs.wireshark = {
+    enable = true;
+    dumpcap.enable = true; # Allow non-root capture of packets
+  };
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
   # == System Defaults
   programs.zsh.enable = true; # Default shell for root
+
   time.timeZone = "Europe/Oslo";
   i18n.defaultLocale = "en_US.UTF-8";
+
   console = {
     font = "Lat2-Terminus16";
     keyMap = "no";
     # useXkbConfig = true; # use xkb.options in tty.
   };
+
   services.xserver = {
     enable = true;
     xkb = {
@@ -67,6 +96,7 @@
     };
   };
   services.libinput.enable = true; # Enable touchpad support
+
   users.users.simen = {
     isNormalUser = true;
     shell = pkgs.zsh;
@@ -90,26 +120,6 @@
     nixfmt
     nixd
   ];
-
-  # == Networking
-  networking.hostName = "skt-thinkpad";
-  networking.networkmanager.enable = true;
-  services.tailscale.enable = true;
-  services.mullvad-vpn.enable = true;
-  services.syncthing = {
-    enable = true;
-    user = "simen";
-    dataDir = "/home/simen";
-  };
-  programs.wireshark = {
-    enable = true;
-    dumpcap.enable = true; # Allow non-root capture of packets
-  };
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # == Virtualisation
   virtualisation.virtualbox.host.enable = true;
