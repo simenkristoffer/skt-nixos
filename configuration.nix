@@ -13,6 +13,14 @@
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; # Enable flakes
 
+  # Enables NH (Yet Another Nix CLI Helper https://github.com/nix-community/nh)
+  programs.nh = {
+    enable = true;
+    clean.enable = true; # Enables automatic garbage collection
+    clean.extraArgs = "--keep-since 4d --keep 3";
+    flake = "/home/simen/nixos"; # sets NH_OS_FLAKE variable for you
+  };
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.xbootldrMountPoint = "/boot";
