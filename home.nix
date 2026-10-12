@@ -113,10 +113,10 @@
     };
       font = {
         normal = { 
-          family = "DepartureMono Nerd Font"; 
-          style = "Regular";
+          family = "CozetteCrossedSevenVector"; 
+          style = "Medium";
           };
-        size = 16.5;
+        size = 19.5;
         };
   };
 };

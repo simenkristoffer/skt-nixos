@@ -161,9 +161,11 @@
   };
 
 fonts.packages = with pkgs; [
+    # Bitmaps
     nerd-fonts.departure-mono
     cozette
-  ];
+    terminus_font #Fin på 14px tamsyn
+    ];
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
