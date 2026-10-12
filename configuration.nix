@@ -14,8 +14,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./modules/niri.nix
-    ./modules/gnome.nix
+    ./modules/nixos/niri/default.nix
+    ./modules/nixos/gnome/default.nix
   ];
 
   # == NixOS Specific
