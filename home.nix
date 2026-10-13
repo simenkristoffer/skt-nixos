@@ -44,14 +44,12 @@
     enableCompletion = false; # Makes Antidote load faster
     antidote = {
       enable = true;
-      plugins = {
-        "mattmc3/zfunctions" = { };
-        "zsh-users/zsh-autosuggestions" = { };
-        "zdharma-continuum/fast-syntax-highlighting" = {
-          kind = "defer";
-        };
-        "zsh-users/zsh-history-substring-search" = { };
-      };
+      plugins = [
+        "mattmc3/zfunctions"
+        "zsh-users/zsh-autosuggestions"
+        "zdharma-continuum/fast-syntax-highlighting kind:defer"
+        "zsh-users/zsh-history-substring-search"
+      ];
     };
   };
 
