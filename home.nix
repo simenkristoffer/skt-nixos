@@ -113,10 +113,10 @@
     };
       font = {
         normal = { 
-          family = "CozetteCrossedSevenVector"; 
-          style = "Medium";
+          family = "Mononoki Nerd Font Mono";
+          style = "Regular";
           };
-        size = 19.5;
+        size = 14;
         };
   };
 };

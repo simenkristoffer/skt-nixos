@@ -173,6 +173,7 @@ fonts.packages = with pkgs; [
     nerd-fonts.departure-mono
     cozette
     terminus_font #Fin på 14px tamsyn
+    nerd-fonts.mononoki
     ];
 
   # Enable the OpenSSH daemon.
