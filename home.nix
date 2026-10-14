@@ -25,8 +25,8 @@
     zoom-us
     spotify
     claude-code
-    zotero
     libreoffice
+    zotero
     gnome-boxes
     nodejs_22
 
