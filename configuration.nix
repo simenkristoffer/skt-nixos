@@ -174,6 +174,8 @@ fonts.packages = with pkgs; [
     cozette
     terminus_font #Fin på 14px tamsyn
     nerd-fonts.mononoki
+    nerd-fonts.gohufont
+    tamzen
     ];
 
   # Enable the OpenSSH daemon.

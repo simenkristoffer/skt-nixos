@@ -112,11 +112,11 @@
       };
     };
       font = {
-        normal = { 
-          family = "Mononoki Nerd Font Mono";
+        normal = {
+          family = "Tamzen";
           style = "Regular";
           };
-        size = 14;
+        size = 20;
         };
   };
 };
