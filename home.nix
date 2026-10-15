@@ -113,10 +113,10 @@
     };
       font = {
         normal = {
-          family = "Tamzen";
+          family = "IosevkaTerm Nerd Font";
           style = "Regular";
           };
-        size = 20;
+        size = 16;
         };
   };
 };

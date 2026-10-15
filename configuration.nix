@@ -175,6 +175,7 @@ fonts.packages = with pkgs; [
     terminus_font #Fin på 14px tamsyn
     nerd-fonts.mononoki
     nerd-fonts.gohufont
+    nerd-fonts.iosevka-term
     tamzen
     ];
 
