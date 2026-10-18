@@ -12,7 +12,7 @@
     ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; # Enable flakes
-
+  
   # Enables NH (Yet Another Nix CLI Helper https://github.com/nix-community/nh)
   programs.nh = {
     enable = true;
@@ -177,6 +177,7 @@ fonts.packages = with pkgs; [
     nerd-fonts.gohufont
     nerd-fonts.iosevka-term
     tamzen
+    google-fonts
     ];
 
   # Enable the OpenSSH daemon.

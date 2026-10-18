@@ -24,12 +24,10 @@
     rustdesk
     zoom-us
     spotify
-    claude-code
     libreoffice
     zotero
     gnome-boxes
     nodejs_22
-
     catt
     # School related
     wireshark
@@ -43,6 +41,9 @@
   programs.zsh = {
     enable = true;
     enableCompletion = false; # Makes Antidote load faster
+    initContent = ''
+      bindkey -e
+    '';
     };
 
   programs.zsh.antidote = {
@@ -113,10 +114,10 @@
     };
       font = {
         normal = {
-          family = "IosevkaTerm Nerd Font";
+          family = "Adwaita Mono";
           style = "Regular";
           };
-        size = 16;
+        size = 14;
         };
   };
 };
