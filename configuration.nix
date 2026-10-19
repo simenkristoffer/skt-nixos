@@ -14,8 +14,8 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./modules/nixos/niri/default.nix
-    ./modules/nixos/gnome/default.nix
+    ./modules/nixos/niri.nix
+    ./modules/nixos/gnome.nix
   ];
 
   # == NixOS Specific
@@ -31,6 +31,8 @@
     users.simen = import ./home.nix;
     backupFileExtension = "backup";
   };
+
+  nixpkgs.config.allowUnfree = true; # Allow unfree packages...
 
   # == System & Boot
   boot = {
@@ -49,7 +51,6 @@
   };
 
   hardware.enableRedistributableFirmware = true;
-  nixpkgs.config.allowUnfree = true; # Allow unfree packages...
   zramSwap.enable = true; # In-memory SWAP
 
   # == Networking

@@ -1,14 +1,19 @@
+# ────────────────────────────────────
+#   simen@skt-thinkpad — Home Manager
+# ────────────────────────────────────
+
 {
   config,
   pkgs,
   inputs,
   ...
 }:
-# TODO: xdg.userDirs
+
 {
   imports = [
-    ./modules/home/niri/default.nix
-    ./modules/home/noctalia/default.nix
+    ./modules/home/desktop/niri
+    ./modules/home/desktop/noctalia
+    ./modules/home/editor/neovim
   ];
 
   # == Home Manager Specific
@@ -17,28 +22,34 @@
   home.username = "simen";
   home.homeDirectory = "/home/simen";
 
+  # TODO: xdg.userDirs
+
   # == Packages
   home.packages = with pkgs; [
+    # Browser
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
-    vscode
-    todoist
-    obsidian
-    rustdesk
-    zoom-us
-    spotify
-    claude-code
-    zotero
+    # Productivity
     libreoffice
-    nodejs_22
+    obsidian
+    todoist
+    zotero
+    # Communication & Media
     catt
-    # School related
-    wireshark
-    mysql-workbench
+    spotify
+    zoom-us
+    # Development
+    nodejs_22
+    vscode
+    # Databases
     dbeaver-bin
     harlequin
+    mysql-workbench
+    # Networking & Remote
+    rustdesk
+    wireshark
   ];
 
-  # == Shell & Terminal
+  # == Shell
   programs.zsh = {
     enable = true;
     enableCompletion = false; # Makes Antidote load faster
@@ -59,22 +70,7 @@
     options = [ "--cmd cd" ];
   };
 
-  # == PROGRAMS
-  # -- Git
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "Simen Kristoffer";
-        email = "post@simenkristoffer.no";
-      };
-      push.autoSetupRemote = true;
-      init.defaultBranch = "main";
-      core.editor = "nvim";
-    };
-  };
-
-  # -- Alacritty
+  # == Terminal
   programs.alacritty = {
     enable = true;
     settings = {
@@ -105,45 +101,18 @@
     };
   };
 
-  # -- Neovim
-  programs.neovim = {
+  # == Git
+  programs.git = {
     enable = true;
-    viAlias = true;
-    vimAlias = true;
-    defaultEditor = true;
-
-    plugins = [
-      pkgs.vimPlugins.nvim-treesitter.withAllGrammars # Install Tree-sitter https://github.com/nvim-treesitter/nvim-treesitter
-      pkgs.vimPlugins.vim-moonfly-colors
-      pkgs.vimPlugins.neo-tree-nvim
-    ];
-
-    initLua = ''
-      -- Line numbers
-      vim.opt.number = true
-      vim.opt.relativenumber = true
-
-      -- Tabs and indentation
-      vim.opt.tabstop = 2
-      vim.opt.shiftwidth = 2
-      vim.opt.expandtab = true
-      vim.opt.autoindent = true
-      vim.opt.smartindent = true
-
-      -- Appearance
-      vim.opt.wrap = false
-      vim.opt.cursorline = true
-      vim.opt.scrolloff = 8
-
-      vim.cmd.colorscheme('moonfly')
-
-      -- Tree-sitter: enable for all filetypes that have a parser
-      vim.api.nvim_create_autocmd('FileType', {
-        callback = function(args)
-          pcall(vim.treesitter.start, args.buf)
-        end,
-      })
-    '';
+    settings = {
+      user = {
+        name = "Simen Kristoffer";
+        email = "post@simenkristoffer.no";
+      };
+      push.autoSetupRemote = true;
+      init.defaultBranch = "main";
+      core.editor = "nvim";
+    };
   };
 
   # == Theming
