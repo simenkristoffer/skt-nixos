@@ -143,6 +143,8 @@
     git
     zip
     unzip
+    v4l-utils
+    cameractrls
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

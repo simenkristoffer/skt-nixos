@@ -28,7 +28,9 @@
     zotero
     gnome-boxes
     nodejs_22
+    discord
     catt
+    aerc
     # School related
     wireshark
     mysql-workbench
