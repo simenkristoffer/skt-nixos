@@ -13,6 +13,5 @@
     ];
 
     initLua = builtins.readFile ./init.lua;
-
   };
 }
