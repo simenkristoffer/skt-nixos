@@ -13,7 +13,7 @@
   imports = [
     ./modules/home/desktop/niri
     ./modules/home/desktop/noctalia
-    ./modules/home/editor/neovim
+    ./modules/home/neovim.nix
   ];
 
   # == Home Manager Specific
