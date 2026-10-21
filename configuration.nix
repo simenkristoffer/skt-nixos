@@ -145,6 +145,8 @@
     unzip
     v4l-utils
     cameractrls
+    python3
+    uv
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

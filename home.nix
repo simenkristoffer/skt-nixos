@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -12,7 +17,7 @@
 
   programs.home-manager.enable = true;
 
-# TODO: xdg.userDirs
+  # TODO: xdg.userDirs
 
   home.packages = with pkgs; [
     bat
@@ -31,6 +36,7 @@
     discord
     catt
     aerc
+    helix
     # School related
     wireshark
     mysql-workbench
@@ -38,47 +44,43 @@
     harlequin
   ];
 
-
-# -- zsh
+  # -- zsh
   programs.zsh = {
     enable = true;
     enableCompletion = false; # Makes Antidote load faster
     initContent = ''
       bindkey -e
     '';
-    };
-
-  programs.zsh.antidote = {
-      enable = true;
-      plugins = [
-        "mattmc3/zfunctions"
-        "zsh-users/zsh-autosuggestions"
-        "zdharma-continuum/fast-syntax-highlighting kind:defer"
-        "zsh-users/zsh-history-substring-search"
-      ];
   };
 
-# -- zoxide
+  programs.zsh.antidote = {
+    enable = true;
+    plugins = [
+      "mattmc3/zfunctions"
+      "zsh-users/zsh-autosuggestions"
+      "zdharma-continuum/fast-syntax-highlighting kind:defer"
+      "zsh-users/zsh-history-substring-search"
+    ];
+  };
+
+  # -- zoxide
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
     options = [ "--cmd cd" ];
   };
 
-
-
-# -- Cursor
+  # -- Cursor
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
     name = "Adwaita";
     package = pkgs.adwaita-icon-theme;
     size = 16;
-};
+  };
 
-
-# === PROGRAMS === #
-# -- Git
+  # === PROGRAMS === #
+  # -- Git
   programs.git = {
     enable = true;
     settings = {
@@ -92,8 +94,7 @@
     };
   };
 
-
-# -- Alacritty
+  # -- Alacritty
   programs.alacritty = {
     enable = true;
     settings = {
@@ -112,26 +113,26 @@
         padding = {
           x = 7;
           y = 7;
+        };
       };
-    };
       font = {
         normal = {
           family = "Adwaita Mono";
           style = "Regular";
-          };
-        size = 14;
         };
+        size = 14;
+      };
+    };
   };
-};
 
-# -- Neovim
+  # -- Neovim
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
 
-   plugins = [
+    plugins = [
       pkgs.vimPlugins.nvim-treesitter.withAllGrammars # Install Tree-sitter https://github.com/nvim-treesitter/nvim-treesitter
       pkgs.vimPlugins.vim-moonfly-colors
       pkgs.vimPlugins.neo-tree-nvim
@@ -162,7 +163,9 @@
           pcall(vim.treesitter.start, args.buf)
         end,
       })
-    '';      
-    };
+    '';
+  };
 
+home.sessionVariables.UV_PYTHON_DOWNLOADS = "never"; # Stops UV from downloading its own version of python (which wont run)
+# programs.nix-ld.libraries = with pkgs; [ openssl ]; # Something something makes Python easier, google it
 }
