@@ -1,3 +1,7 @@
+# ────────────────────────────────────
+#   simen@skt-thinkpad — Home Manager
+# ────────────────────────────────────
+
 {
   config,
   pkgs,
@@ -7,94 +11,72 @@
 
 {
   imports = [
-    ./modules/home/niri/default.nix
-    ./modules/home/noctalia/default.nix
+    ./modules/home/desktop/niri
+    ./modules/home/desktop/noctalia
+    ./modules/home/neovim
   ];
+
+  # == Home Manager Specific
+  programs.home-manager.enable = true;
 
   home.username = "simen";
   home.homeDirectory = "/home/simen";
-  home.stateVersion = "26.05";
-
-  programs.home-manager.enable = true;
 
   # TODO: xdg.userDirs
 
+  # == Packages
   home.packages = with pkgs; [
-    bat
+    # Browser
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
-    tree
-    vscode
-    todoist
-    obsidian
-    rustdesk
-    zoom-us
-    spotify
+    # Productivity
     libreoffice
+    obsidian
+    todoist
     zotero
-    gnome-boxes
-    nodejs_22
-    discord
-    catt
+    # Communication & Media
     aerc
+    catt
+    discord
+    spotify
+    zoom-us
+    # Development
     helix
-    # School related
-    wireshark
-    mysql-workbench
+    nodejs_22
+    vscode
+    # Databases
     dbeaver-bin
     harlequin
+    mysql-workbench
+    # Networking & Remote
+    rustdesk
+    wireshark
   ];
 
-  # -- zsh
+  # == Shell
   programs.zsh = {
     enable = true;
     enableCompletion = false; # Makes Antidote load faster
     initContent = ''
       bindkey -e
     '';
+    antidote = {
+      enable = true;
+      plugins = [
+        "mattmc3/zfunctions"
+        "zsh-users/zsh-autosuggestions"
+        "zdharma-continuum/fast-syntax-highlighting kind:defer"
+        "zsh-users/zsh-history-substring-search"
+      ];
+    };
   };
 
-  programs.zsh.antidote = {
-    enable = true;
-    plugins = [
-      "mattmc3/zfunctions"
-      "zsh-users/zsh-autosuggestions"
-      "zdharma-continuum/fast-syntax-highlighting kind:defer"
-      "zsh-users/zsh-history-substring-search"
-    ];
-  };
-
-  # -- zoxide
   programs.zoxide = {
     enable = true;
     enableZshIntegration = true;
     options = [ "--cmd cd" ];
   };
 
-  # -- Cursor
-  home.pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-    size = 16;
-  };
-
-  # === PROGRAMS === #
-  # -- Git
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "Simen Kristoffer";
-        email = "post@simenkristoffer.no";
-      };
-      push.autoSetupRemote = true;
-      init.defaultBranch = "main";
-      core.editor = "nvim";
-    };
-  };
-
-  # -- Alacritty
+  # == Terminal
   programs.alacritty = {
     enable = true;
     settings = {
@@ -125,47 +107,34 @@
     };
   };
 
-  # -- Neovim
-  programs.neovim = {
+  # == Git
+  programs.git = {
     enable = true;
-    viAlias = true;
-    vimAlias = true;
-    defaultEditor = true;
-
-    plugins = [
-      pkgs.vimPlugins.nvim-treesitter.withAllGrammars # Install Tree-sitter https://github.com/nvim-treesitter/nvim-treesitter
-      pkgs.vimPlugins.vim-moonfly-colors
-      pkgs.vimPlugins.neo-tree-nvim
-    ];
-
-    initLua = ''
-      -- Line numbers
-      vim.opt.number = true
-      vim.opt.relativenumber = true
-
-      -- Tabs and indentation
-      vim.opt.tabstop = 2
-      vim.opt.shiftwidth = 2
-      vim.opt.expandtab = true
-      vim.opt.autoindent = true
-      vim.opt.smartindent = true
-
-      -- Appearance
-      vim.opt.wrap = false
-      vim.opt.cursorline = true
-      vim.opt.scrolloff = 8
-
-      vim.cmd.colorscheme('moonfly')
-
-      -- Tree-sitter: enable for all filetypes that have a parser
-      vim.api.nvim_create_autocmd('FileType', {
-        callback = function(args)
-          pcall(vim.treesitter.start, args.buf)
-        end,
-      })
-    '';
+    settings = {
+      user = {
+        name = "Simen Kristoffer";
+        email = "post@simenkristoffer.no";
+      };
+      push.autoSetupRemote = true;
+      init.defaultBranch = "main";
+      core.editor = "nvim";
+    };
   };
 
-home.sessionVariables.UV_PYTHON_DOWNLOADS = "never"; # Stops UV from downloading its own version of python (which wont run)
-# programs.nix-ld.libraries = with pkgs; [ openssl ]; # Something something makes Python easier, google it
+  # == Theming
+  home.pointerCursor = {
+    # The cursor is super tiny if this is not set.
+    gtk.enable = true;
+    x11.enable = true;
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 16;
+  };
+
+  # == Python
+  home.sessionVariables.UV_PYTHON_DOWNLOADS = "never"; # Stops UV from downloading its own version of python (which wont run)
+  # programs.nix-ld.libraries = with pkgs; [ openssl ]; # Something something makes Python easier, google it
+
+  # DO NOT EVER CHANGE THIS LINE
+  home.stateVersion = "26.05"; # Did you read the comment?
 }

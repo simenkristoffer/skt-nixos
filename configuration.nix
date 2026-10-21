@@ -1,18 +1,29 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
-{ config, lib, pkgs, inputs, ... }:
+# ────────────────────────────────────
+#   skt-thinkpad — NixOS Configuration
+# ────────────────────────────────────
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./modules/niri.nix
-    ];
-  
-  nix.settings.experimental-features = [ "nix-command" "flakes" ]; # Enable flakes
-  
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./modules/nixos/niri.nix
+    ./modules/nixos/gnome.nix
+  ];
+
+  # == NixOS Specific
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   # Enables NH (Yet Another Nix CLI Helper https://github.com/nix-community/nh)
   programs.nh = {
     enable = true;
@@ -21,148 +32,39 @@
     flake = "/home/simen/nixos"; # sets NH_OS_FLAKE variable for you
   };
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.xbootldrMountPoint = "/boot";
-  boot.loader.systemd-boot.configurationLimit = 10;
-  boot.loader.efi.efiSysMountPoint = "/efi";
-  boot.loader.efi.canTouchEfiVariables = true;
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    extraSpecialArgs = { inherit inputs; };
+    users.simen = import ./home.nix;
+    backupFileExtension = "backup";
+  };
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  nixpkgs.config.allowUnfree = true; # Allow unfree packages...
+
+  # == System & Boot
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+        xbootldrMountPoint = "/boot";
+        configurationLimit = 10;
+      };
+      efi = {
+        efiSysMountPoint = "/efi";
+        canTouchEfiVariables = true;
+      };
+    };
+    kernelPackages = pkgs.linuxPackages_latest; # Use latest kernel.
+  };
+
   hardware.enableRedistributableFirmware = true;
+  zramSwap.enable = true; # In-memory SWAP
 
-  # In-memory SWAP
-  zramSwap.enable = true;
-
-  # Allow unfree packages...
-  nixpkgs.config.allowUnfree = true;
-
-  networking.hostName = "skt-thinkpad"; # Define your hostname.
-
-  # Set default shell
-  programs.zsh.enable = true;
-
-  # Configure network connections interactively with nmcli or nmtui.
+  # == Networking
+  networking.hostName = "skt-thinkpad";
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/Oslo";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # GNOME
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  services.gnome = {
-    core-apps.enable = true;
-    core-developer-tools.enable = true;
-    };
-
-  systemd.user.services.polkit-gnome-authentication-agent-1 = {
-  description = "polkit-gnome-authentication-agent-1";
-  wantedBy = [ "graphical-session.target" ];
-  wants = [ "graphical-session.target" ];
-  after = [ "graphical-session.target" ];
-  serviceConfig = {
-    Type = "simple";
-    ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-    Restart = "on-failure";
-    RestartSec = 1;
-    TimeoutStopSec = 10;
-  };
-};
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "no";
-  # useXkbConfig = true; # use xkb.options in tty.
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;  
-
-
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "no";
-  services.xserver.xkb.variant = "nodeadkeys";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput.enable = true;
-
-  # Allow non-root capture of packets (grants CAP_NET_RAW/CAP_NET_ADMIN to dumpcap)
-  programs.wireshark.enable = true;
-  programs.wireshark.dumpcap.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.simen = {
-    isNormalUser = true;
-    shell = pkgs.zsh;
-    extraGroups = [ "wheel" "wireshark" ]; # Enable ‘sudo’ for the user.
-  };
-
-  # Home Manager
-    home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = true;
-    home-manager.extraSpecialArgs = { inherit inputs; };
-    home-manager.users.simen = import ./home.nix;
-    home-manager.backupFileExtension = "backup";
-  
-# Enable VirtualBox
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "simen" ];
-
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = with pkgs; [
-    brightnessctl
-    # Nix language support
-    nixfmt
-    nixd
-
-    xwayland-satellite
-    wget
-    neovim
-    git
-    zip
-    unzip
-    v4l-utils
-    cameractrls
-    python3
-    uv
-  ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  hardware.bluetooth.enable = true;
-  services.power-profiles-daemon.enable = true;
-  services.upower.enable = true;
-  services.fprintd.enable = true;
   services.tailscale.enable = true;
   services.mullvad-vpn.enable = true;
 
@@ -172,20 +74,10 @@
     dataDir = "/home/simen";
   };
 
-fonts.packages = with pkgs; [
-    # Bitmaps
-    nerd-fonts.departure-mono
-    cozette
-    terminus_font #Fin på 14px tamsyn
-    nerd-fonts.mononoki
-    nerd-fonts.gohufont
-    nerd-fonts.iosevka-term
-    tamzen
-    google-fonts
-    ];
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  programs.wireshark = {
+    enable = true;
+    dumpcap.enable = true; # Allow non-root capture of packets
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -193,29 +85,86 @@ fonts.packages = with pkgs; [
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
+  # == System Defaults
+  programs.zsh.enable = true; # Default shell for root
 
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
+  time.timeZone = "Europe/Oslo";
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "no";
+    # useXkbConfig = true; # use xkb.options in tty.
+  };
+
+  services.xserver = {
+    enable = true;
+    xkb = {
+      layout = "no";
+      variant = "nodeadkeys";
+      #options = "eurosign:e,caps:escape";
+    };
+  };
+  services.libinput.enable = true; # Enable touchpad support
+
+  users.users.simen = {
+    isNormalUser = true;
+    shell = pkgs.zsh;
+    extraGroups = [
+      "wheel"
+      "wireshark"
+    ];
+  };
+
+  # == System Packages
+  environment.systemPackages = with pkgs; [
+    # Essential
+    brightnessctl
+    xwayland-satellite
+    wget
+    neovim
+    git
+    zip
+    unzip
+    bat
+    tree
+    # Webcam
+    v4l-utils
+    cameractrls
+    # Python
+    python3
+    uv
+    # Nix language support
+    nixfmt
+    nixd
+  ];
+
+  # == Virtualisation
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "simen" ];
+
+  # == Power and Session Services
+  services = {
+    power-profiles-daemon.enable = true;
+    upower.enable = true;
+    fprintd.enable = true;
+  };
+  hardware.bluetooth.enable = true;
+
+  # == Fonts
+  fonts.packages = with pkgs; [
+    # Bitmaps
+    nerd-fonts.departure-mono
+    cozette
+    terminus_font # Fin på 14px tamsyn
+    nerd-fonts.mononoki
+    nerd-fonts.gohufont
+    nerd-fonts.iosevka-term
+    tamzen
+    google-fonts
+  ];
+
+  # DO NOT EVER CHANGE THIS LINE
   system.stateVersion = "26.05"; # Did you read the comment?
 
 }
-
