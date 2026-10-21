@@ -105,7 +105,7 @@
       #options = "eurosign:e,caps:escape";
     };
   };
-  services.libinput.enable = true; # Enable touchpad support
+  services.libinput.enable = true; # Enables touchpad support
 
   users.users.simen = {
     isNormalUser = true;
