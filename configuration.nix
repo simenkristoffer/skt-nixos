@@ -118,25 +118,32 @@
 
   # == System Packages
   environment.systemPackages = with pkgs; [
-    # Essential
+    # -- CLI basics
+    bat
+    git
+    tree
+    unzip
+    wget
+    zip
+
+    # -- Editor
+    neovim
+
+    # -- Desktop & hardware
     brightnessctl
     xwayland-satellite
-    wget
-    neovim
-    git
-    zip
-    unzip
-    bat
-    tree
-    # Webcam
-    v4l-utils
+
+    # -- Webcam
     cameractrls
-    # Python
+    v4l-utils
+
+    # -- Python
     python3
     uv
-    # Nix language support
-    nixfmt
+
+    # -- Nix language support
     nixd
+    nixfmt
   ];
 
   # == Virtualisation

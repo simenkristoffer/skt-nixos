@@ -13,7 +13,7 @@
   imports = [
     ./modules/home/desktop/niri
     ./modules/home/desktop/noctalia
-    ./modules/home/neovim
+    ./modules/home/editor/neovim
   ];
 
   # == Home Manager Specific
@@ -26,39 +26,44 @@
 
   # == Packages
   home.packages = with pkgs; [
-    # Browser
+    # -- Browser
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
-    # Productivity
+
+    # -- Productivity
     libreoffice
     obsidian
     todoist
     zotero
-    # Communication & Media
+
+    # -- Communication
     aerc
-    catt
     discord
-    spotify
     zoom-us
-    # Development
+
+    # -- Media
+    catt
+    spotify
+
+    # -- Development
     helix
     nodejs_22
     vscode
-    # Databases
+
+    # -- Databases
     dbeaver-bin
     harlequin
     mysql-workbench
-    # Networking & Remote
+
+    # -- Networking & Remote
     rustdesk
     wireshark
+
   ];
 
   # == Shell
   programs.zsh = {
     enable = true;
     enableCompletion = false; # Makes Antidote load faster
-    initContent = ''
-      bindkey -e
-    '';
     antidote = {
       enable = true;
       plugins = [
@@ -130,10 +135,6 @@
     package = pkgs.adwaita-icon-theme;
     size = 16;
   };
-
-  # == Python
-  home.sessionVariables.UV_PYTHON_DOWNLOADS = "never"; # Stops UV from downloading its own version of python (which wont run)
-  # programs.nix-ld.libraries = with pkgs; [ openssl ]; # Something something makes Python easier, google it
 
   # DO NOT EVER CHANGE THIS LINE
   home.stateVersion = "26.05"; # Did you read the comment?
