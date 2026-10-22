@@ -45,7 +45,6 @@
     spotify
 
     # -- Development
-    helix
     nodejs_22
     vscode
 
@@ -125,6 +124,18 @@
       core.editor = "nvim";
     };
   };
+
+  # == Helix
+  programs.helix = {
+    enable = true;
+    settings = {
+      editor = {
+        line-number = "relative";
+      };
+      theme = "base16_transparent";
+    };
+  };
+
 
   # == Theming
   home.pointerCursor = {

@@ -128,6 +128,7 @@
 
     # -- Editor
     neovim
+    helix
 
     # -- Desktop & hardware
     brightnessctl
