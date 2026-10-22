@@ -113,6 +113,7 @@
     extraGroups = [
       "wheel"
       "wireshark"
+      "libvirtd"
     ];
   };
 
@@ -148,8 +149,24 @@
   ];
 
   # == Virtualisation
+  # -- VirtualBox
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "simen" ];
+  
+ # -- QEMU / KVM
+  programs.virt-manager.enable = true;
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        swtpm.enable = true; # Required if you plan to use TPM/Windows 11
+        runAsRoot = true;
+      };
+    };
+    spiceUSBRedirection.enable = true; # For USB passthrough support
+  };
+  
 
   # == Power and Session Services
   services = {
