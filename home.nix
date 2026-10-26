@@ -26,10 +26,14 @@
 
   # == Packages
   home.packages = with pkgs; [
+    # -- 3D Printing
+    orca-slicer
+
     # -- Browser
     inputs.zen-browser.packages."${pkgs.stdenv.hostPlatform.system}".default
 
     # -- Productivity
+    foliate
     libreoffice
     obsidian
     todoist

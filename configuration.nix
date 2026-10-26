@@ -41,6 +41,7 @@
   };
 
   nixpkgs.config.allowUnfree = true; # Allow unfree packages...
+  programs.nix-ld.enable = true; # # Allows generic dynamically linked Linux binaries to run...
 
   # == System & Boot
   boot = {
