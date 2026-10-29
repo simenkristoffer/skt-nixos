@@ -46,6 +46,7 @@
 
     # -- Media
     catt
+    darktable
     spotify
 
     # -- Development
