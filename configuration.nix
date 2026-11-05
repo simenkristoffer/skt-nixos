@@ -62,6 +62,8 @@
   hardware.enableRedistributableFirmware = true;
   zramSwap.enable = true; # In-memory SWAP
 
+  services.fwupd.enable = true; # Enables firmware-updates with fwupdmgr
+
   # == Networking
   networking.hostName = "skt-thinkpad";
   networking.networkmanager.enable = true;
