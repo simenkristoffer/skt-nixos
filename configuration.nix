@@ -124,6 +124,7 @@
   environment.systemPackages = with pkgs; [
     # -- CLI basics
     bat
+    btop
     git
     tree
     unzip
