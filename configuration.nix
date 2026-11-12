@@ -184,12 +184,14 @@
   fonts.packages = with pkgs; [
     # Bitmaps
     nerd-fonts.departure-mono
+    corefonts
     cozette
     terminus_font # Fin på 14px tamsyn
     nerd-fonts.mononoki
     nerd-fonts.gohufont
     nerd-fonts.iosevka-term
     tamzen
+    vista-fonts
     google-fonts
   ];
 
