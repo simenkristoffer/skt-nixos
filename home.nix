@@ -137,6 +137,10 @@
     settings = {
       editor = {
         line-number = "relative";
+        soft-wrap = {
+          enable = true;
+          wrap-indicator = "↪ ";
+        };
       };
       theme = "base16_transparent";
     };
