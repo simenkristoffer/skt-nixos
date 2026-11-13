@@ -35,6 +35,7 @@
     # -- Productivity
     anki
     foliate
+    file-roller
     libreoffice
     obsidian
     todoist

@@ -68,7 +68,17 @@
   networking.hostName = "skt-thinkpad";
   networking.networkmanager.enable = true;
 
-  services.tailscale.enable = true;
+  # Enable IP forwarding
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
+  
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both"; # Enables forwarding & firewall rules for subnet routing + client routes
+  };
+  
   services.mullvad-vpn.enable = true;
 
   services.syncthing = {
