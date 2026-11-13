@@ -69,6 +69,7 @@
   # == Shell
   programs.zsh = {
     enable = true;
+    defaultKeymap = "emacs";
     enableCompletion = false; # Makes Antidote load faster
     antidote = {
       enable = true;
